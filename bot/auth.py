@@ -5,7 +5,7 @@ Run from project root:
     python bot/auth.py
 
 Or inside Docker (interactive, needs TTY):
-    docker compose run --rm -it bot python auth.py
+    docker compose run --rm -it bot python bot/auth.py
 """
 
 import asyncio
