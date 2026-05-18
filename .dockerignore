@@ -1,0 +1,13 @@
+.env
+data/
+*.session
+logs/
+bot.log
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
