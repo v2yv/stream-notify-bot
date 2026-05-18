@@ -128,47 +128,36 @@ docker compose logs --tail 50  # последние строки лога
 
 ---
 
-## Обновление на сервере
+## Обновление
 
-Когда в репозитории появились новые коммиты (например, исправления Docker):
+Репозиторий: **https://github.com/v2yv/stream-notify-bot**
+
+На сервере, когда на GitHub появились новые коммиты:
 
 ```bash
 cd /opt/stream-notify-bot
-git pull
+git pull origin main
 docker compose up -d --build
 docker compose logs -f
 ```
 
 Сессия в `data/` и настройки в `.env` **сохраняются** — повторный `auth.py` не нужен, если `data/notify_session.session` на месте.
 
-Если `git pull` ругается на локальные правки (вы правили файлы на сервере):
+Если `git pull` ругается на локальные правки (правили файлы прямо на сервере):
 
 ```bash
 git stash
-git pull
+git pull origin main
 docker compose up -d --build
 ```
 
-или сбросить только изменённые файлы из репо (осторожно — потеряете правки на сервере):
+или откатить файлы проекта к версии с GitHub (правки на сервере пропадут):
 
 ```bash
-git checkout -- .
-git pull
+git fetch origin
+git reset --hard origin/main
 docker compose up -d --build
 ```
-
-### Как выложить свои правки в GitHub (с ПК разработчика)
-
-Если вы меняли проект локально и хотите, чтобы сервер мог сделать `git pull`:
-
-```bash
-cd d:\code\stream-notify-bot   # ваш путь к проекту
-git add .
-git commit -m "описание изменений"
-git push origin main
-```
-
-После `git push` на сервере выполните блок «Обновление на сервере» выше.
 
 ---
 
